@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+a{
+    color: black;
+    text-decoration: none;
+}
+ .active{
+        color: red;
+}
+
+
+.ng-invalid:not(form):not(.ng-untouched):active  {
+  transition: all 1s;
+  border: 1px solid red !important; /* red */
+}
+
+.animation-in{
+  animation-name: animationKeyFrame;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  border-radius: 0 0 5px 5px;
+}
+@keyframes animationKeyFrame {
+  0%{
+    opacity:0;
+    transform: translateY(-20px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(-8px);
+  }
+}
+
+.animation-pop{
+  animation-name: animationPopFrame;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  height: 100%;
+  overflow: hidden;
+}
+@keyframes animationPopFrame {
+  0%{
+    max-height: 0;
+    opacity: 0;
+  }
+  40%{
+    opacity: 1;
+  }
+  100%{
+    max-height:100px;
+  }
+}

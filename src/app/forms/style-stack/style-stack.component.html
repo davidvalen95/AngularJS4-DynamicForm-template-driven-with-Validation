@@ -1,0 +1,16 @@
+
+
+<div class="form-group" >
+  <label class="form-control-label" for="{{this.baseForm.name}}Id">{{this.baseForm.labelValue}}</label>
+  <input [name]="this.baseForm.name"
+          #input="ngModel"
+         [(ngModel)]="this.baseForm.value"
+         [required]="this.baseForm.rules['required']"
+         [minlength]="this.baseForm.rules['minlength']"
+         [maxlength]="this.baseForm.rules['maxlength']"
+         [pattern]="this.baseForm.rules['pattern']"
+         type="{{this.baseForm.type}}"
+         class="form-control"
+         id="{{this.baseForm.name}}Id"/>
+  <app-show-error-second [baseForm]="this.baseForm" [model]="input"></app-show-error-second>
+</div>

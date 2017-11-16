@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {JokeService} from "./services/joke.service";
+import {FlashService} from "./services/flash.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  constructor(private jokeService: JokeService, public flashService:FlashService){
+
+  }
 }
+

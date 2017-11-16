@@ -1,0 +1,23 @@
+
+
+
+
+
+
+<div class="row">
+  <div class="offset-3 col-6">
+    <form #loginForm="ngForm" novalidate (submit)="formSubmit(loginForm)">
+      <span *ngFor="let baseForm of this.baseForms">
+        <app-style-stack [parentForm]="loginForm" [baseForm]="baseForm"></app-style-stack>
+      </span>
+      <button [disabled]="!loginForm.valid"  class="btn btn-success" type="submit">Login</button>
+    </form>
+
+    <pre>
+      {{loginForm.value | json}}
+    </pre>
+  </div>
+</div>
+
+
+
