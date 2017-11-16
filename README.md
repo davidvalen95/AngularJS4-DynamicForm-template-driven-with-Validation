@@ -1,28 +1,61 @@
 # Dynamic Form with template-driven
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.2.
+## Logic
+This dynamic form use template driven form And Very simple to use
+1. *ngFor the form array
+1. provide the style stack with the current form info and parent Form
+1. provide the model for show error component inside style stack
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Usage
 
-## Code scaffolding
+**inside component.ts**
+```javascript
+constructor(private title: Title) {
+    title.setTitle('Login');
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    const usernameForm: BaseForm = new BaseForm('Username', 'Username', 'username', 'text');
+    usernameForm.rules = {
+      'required': true,
+      'minlength': 5,
+      'maxlength': 7,
+      'pattern': '[\\w]*',
+      'patternInfo': 'Only word and number no spaces and symbols'
+    };
+    usernameForm.value = 'myName';
 
-## Build
+    const passwordForm: BaseForm = new BaseForm('Password', 'Password', 'password', 'password');
+    passwordForm.rules = {
+      'required': true,
+      'maxlength': 10
+    };
+    this.baseForms.push(usernameForm, passwordForm);
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+  }
 
-## Running unit tests
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. app.module.ts
+    1. include components in declarations
+        1. show-errors.component
+        1. style-stack.component
+1. Create BaseForm Object from src/app/forms/base-form.ts
+1. Supply constructor in login.component.ts with label,placeholder,name, input type, like pages/login/login.component.ts
+1. Supply rules if needed
+1. push in array
+1. in html usage like pages/login/login.component.html
 
-## Running end-to-end tests
+## Rules
+* required : true | false
+* minlength: number
+* maxlength: number
+* pattern : regex
+* patternInfo: String the info of regex rule
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+## Default value
+* in BaseForm Object set the .value, it will be 2 way binding
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## required file
+* all inside src/app/forms
+* optional the src/style.css for form animation
+* bootstrap v4 for this demo
