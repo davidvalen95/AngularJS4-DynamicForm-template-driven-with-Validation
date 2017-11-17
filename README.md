@@ -1,10 +1,10 @@
-# Dynamic Form with template-driven
+*Dynamic Form with template-driven
 
 ## Logic
 This dynamic form use template driven form And Very simple to use
-1. *ngFor the form array
-1. provide the style stack with the current form info and parent Form
-1. provide the model for show error component inside style stack
+1. *ngFor array of form objects
+1. will call template for the input suplied by each form object from ngfor
+1. inside step 2 will use app- selector of component to display error
 
 
 ## Usage
@@ -34,28 +34,34 @@ constructor(private title: Title) {
   }
 
 ```
+**then in the component.htmll**
 
-1. app.module.ts
-    1. include components in declarations
-        1. show-errors.component
-        1. style-stack.component
-1. Create BaseForm Object from src/app/forms/base-form.ts
-1. Supply constructor in login.component.ts with label,placeholder,name, input type, like pages/login/login.component.ts
-1. Supply rules if needed
-1. push in array
-1. in html usage like pages/login/login.component.html
+```html
+<div class="row">
+  <div class="offset-3 col-6">
+    <form #loginForm="ngForm" novalidate (submit)="formSubmit(loginForm)">
+      <span *ngFor="let baseForm of this.baseForms">
+        <app-style-stack [parentForm]="loginForm" [baseForm]="baseForm"></app-style-stack>
+      </span>
+      <button [disabled]="!loginForm.valid"  class="btn btn-success" type="submit">Login</button>
+    </form>
 
-## Rules
-* required : true | false
+  </div>
+</div>
+
+```
+
+## Form Validation Rules
+* required : boolean
 * minlength: number
 * maxlength: number
-* pattern : regex
-* patternInfo: String the info of regex rule
+* pattern : string regex
+* patternInfo: String the info of regex rule to be displayed to user if pattern not satisfied
 
 ## Default value
 * in BaseForm Object set the .value, it will be 2 way binding
 
 ## required file
 * all inside src/app/forms
-* optional the src/style.css for form animation
+* optional the src/style.css for form animation for this demo
 * bootstrap v4 for this demo

@@ -49,3 +49,27 @@ a{
     max-height:100px;
   }
 }
+
+
+.circle{
+  margin-top:100px;
+  width: 100px;
+  height: 100px;
+  border-radius:100%;
+  background: red;
+
+  animation-name: animationPopUp;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  /* animation-timing-function: linear; */
+}
+@keyframes animationPopUp{
+
+  0%{
+    transform:scale(0,0)  translate(100px,100px);
+  }
+
+  100%{
+    transform: scale(1,1) ;;
+  }
+}
